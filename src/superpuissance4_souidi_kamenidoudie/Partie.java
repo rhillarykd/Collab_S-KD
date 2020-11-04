@@ -24,11 +24,11 @@ public class Partie {
         Random r = new Random();// r pour random
         int nCouleur = r.nextInt(2);//nCouleur pour numéro de couleur
         if (nCouleur == 2 || nCouleur == 0) {
-            ListeJoueurs[1].couleur = "rouge";
-            ListeJoueurs[0].couleur = "jaune";
+            ListeJoueurs[1].affecterCouleur("rouge");
+            ListeJoueurs[0].affecterCouleur("jaune");
         } else {
-            ListeJoueurs[0].couleur = "rouge";
-            ListeJoueurs[1].couleur = "jaune";
+            ListeJoueurs[0].affecterCouleur("rouge");
+            ListeJoueurs[1].affecterCouleur("jaune");
         }
     }
     public void debuterPartie() {

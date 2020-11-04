@@ -27,5 +27,4 @@ public class Jetons {
     public String lireCouleur() {
         return couleur;
     }
-    
 }
