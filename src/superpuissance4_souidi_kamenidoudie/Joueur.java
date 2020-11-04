@@ -10,7 +10,7 @@ package superpuissance4_souidi_kamenidoudie;
  * @author osouidi
  */
 public class Joueur {
-    // Un joueur possède un nombre indéfinis de jetons.
+    // Un joueur possède un nombre indéfinis de jetons, initialement 21.
     // Un joueur participe à 1 partie.
     
     //Attributs

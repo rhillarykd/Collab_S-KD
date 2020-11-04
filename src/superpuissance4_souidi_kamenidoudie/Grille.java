@@ -50,12 +50,15 @@ public class Grille {
             for (int j = 0; j < 7; j++) {
                 if (tabCellule[i][j].trouNoir == true || tabCellule[i][j].desintegrateur == true) {
                     if (tabCellule[i][j].trouNoir == true) {
-                        System.out.println("TrouNoir");
+                        System.out.println("t");
                     }
                     if (tabCellule[i][j].desintegrateur == true) {
-                        System.out.println("desintegrateur");
+                        System.out.println("d");
                     }
                 } else {
+                    if (tabCellule[i][j].jetonCourant == null) {
+                        System.out.println("-");
+                    }
                     System.out.println(tabCellule[i][j].jetonCourant.couleur);
                 }
             }
@@ -121,7 +124,7 @@ public class Grille {
             return false;
         } else {
             tabCellule[i][j].trouNoir = true;
-            //tabCellule[i][j] = trouNoir;
+            tabCellule[i][j].jetonCourant.couleur = "t";
             return true;
         }
     }
@@ -131,7 +134,7 @@ public class Grille {
             return false;
         } else {
             tabCellule[i][j].desintegrateur = true;
-            //tabCellule[i][j] = desintegrateur;
+            tabCellule[i][j].jetonCourant.couleur = "d";
             return true;
         }
     }
