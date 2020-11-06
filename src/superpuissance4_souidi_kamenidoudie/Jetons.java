@@ -18,12 +18,12 @@ public class Jetons {
     String couleur;
     
     //Méthodes :
-//• Jeton (String) :	constructeur initialisant la couleur du jeton avec le paramètre
+//• Jeton (String) : constructeur initialisant la couleur du jeton avec le paramètre
     public Jetons (String color) {
         couleur = color;
     }
     
-//• lireCouleur():renvoie la	couleur	du jeton
+//• lireCouleur():renvoie la couleur du jeton
     public String lireCouleur() {
         return couleur;
     }
