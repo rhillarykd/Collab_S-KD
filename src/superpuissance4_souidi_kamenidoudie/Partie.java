@@ -45,13 +45,16 @@ public class Partie {
         for (int nTrouNoir = 0; nTrouNoir < 5; nTrouNoir++) {//nTrouNoir est le nombre de trous noirs -1, il y en a 5 et finalement nombre de désintégrateurs -1
             int iAlea = nAlea.nextInt(6);
             int jAlea = nAlea.nextInt(7);
-            grillePartie.placerTrouNoir(iAlea, jAlea);
+            boolean result = grillePartie.placerTrouNoir(iAlea, jAlea);
+            //grillePartie.tabCellule[iAlea][jAlea].trouNoir = true;
             if (nTrouNoir < 2) {
-                grillePartie.placerDesintegrateur(iAlea,jAlea);
+                result = grillePartie.placerDesintegrateur(iAlea,jAlea);
+                //grillePartie.tabCellule[iAlea][jAlea].desintegrateur = true;
             }
             if (nTrouNoir > 1 && grillePartie.tabCellule[(iAlea+6)/3][(jAlea+7)/3].desintegrateur == false && grillePartie.tabCellule[(iAlea+6)/3][(jAlea+7)/3].trouNoir == false) {
                 //grillePartie.tabCellule[(iAlea+6)/3][(jAlea+7)/3].jetonCourant.couleur = "d";
-                grillePartie.placerDesintegrateur(((iAlea+6)/3),((jAlea+7)/3));
+                result = grillePartie.placerDesintegrateur(((iAlea+6)/3),((jAlea+7)/3));
+                //grillePartie.tabCellule[(iAlea+6)/3][(jAlea+7)/3].desintegrateur = true;
             }
         }
         for (int indice=0; indice < ListeJoueurs[0].ListeJetons.length; indice++) {
@@ -109,10 +112,10 @@ public class Partie {
         } else {
             joueurCourant = ListeJoueurs[1];
         }
-        ListeJoueurs[0].nombreDesintegrateurs = 0;
-        ListeJoueurs[1].nombreDesintegrateurs = 0;
-        ListeJoueurs[0].nombreJetonsRestant = 21;
-        ListeJoueurs[1].nombreJetonsRestant = 21;
+        //ListeJoueurs[0].nombreDesintegrateurs = 0;
+        //ListeJoueurs[1].nombreDesintegrateurs = 0;
+        //ListeJoueurs[0].nombreJetonsRestant = 21;
+        //ListeJoueurs[1].nombreJetonsRestant = 21;
         
         boolean condition = false;
         while(condition == false) {
@@ -120,6 +123,7 @@ public class Partie {
             Scanner c = new Scanner(System.in);
             System.out.println("1 - Ajouter un jeton dans une colonne \n2 - Utiliser un désintégrateur \n3 - Récupérer un jeton ");//Menu, choix des méthodes pour jouer
             int choix = 0;
+            boolean result;
             while (choix == 0) {
                 choix = c.nextInt();
                 Scanner ligneI = new Scanner(System.in);
@@ -130,7 +134,7 @@ public class Partie {
                     int j = colonneJ.nextInt();
                     if (grillePartie.colonneRemplie(j) == false) {
                         //grillePartie.ajouterJetonDansColonne(joueurCourant.ListeJetons[numeroJeton], j);
-                        grillePartie.ajouterJetonDansColonne(joueurCourant.ListeJetons[joueurCourant.ListeJetons.length - joueurCourant.nombreJetonsRestant], j);
+                        result = grillePartie.ajouterJetonDansColonne(joueurCourant.ListeJetons[joueurCourant.ListeJetons.length - joueurCourant.nombreJetonsRestant], j);
                         joueurCourant.nombreJetonsRestant--;
                         System.out.println("Pour savoir si vous avez gagné un désintégrateur, entrez le numéro de la ligne de votre jeton: ");
                         int i = ligneI.nextInt();
@@ -145,7 +149,7 @@ public class Partie {
                         int i = ligneI.nextInt();//numéro de ligne
                         System.out.println("Choisissez la colonne du désintégrateur à placer: "); 
                         int j = colonneJ.nextInt();//numéro de colonne
-                        grillePartie.placerDesintegrateur(i, j);
+                        result = grillePartie.placerDesintegrateur(i, j);
                         grillePartie.tasserGrille(i, j);
                         break;
                     }
@@ -154,7 +158,7 @@ public class Partie {
                     int i = ligneI.nextInt();//numéro de ligne
                     System.out.println("Choisissez la colonne du jeton à recupérer");
                     int j = colonneJ.nextInt();//numéro de colonne
-                    joueurCourant.ajouterJeton(grillePartie.recupererJeton(i, j));
+                    result = joueurCourant.ajouterJeton(grillePartie.recupererJeton(i, j));
                     grillePartie.tasserGrille(i, j);
                     break;
                 }

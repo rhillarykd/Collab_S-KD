@@ -24,6 +24,8 @@ public class Joueur {
     public Joueur(String nomJ) {
         //constructeur initialisant le nom du joueur avec son paramètre
         nom = nomJ;
+        nombreDesintegrateurs = 0;
+        nombreJetonsRestant = 21;
     }
     
     
