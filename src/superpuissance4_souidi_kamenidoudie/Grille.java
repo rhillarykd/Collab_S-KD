@@ -22,12 +22,37 @@ public class Grille {
 //• + ajouterJetonDansColonne(Jeton, int): ajoute le jeton dans la colonne ciblée, sur la cellule vide la plus basse. Renvoie faux si la colonne était pleine.
     public boolean ajouterJetonDansColonne(Jetons jeton, int j) {
         for (int i = tabCellule.length - 1; i >= 0; i--) {
-            if (tabCellule[i][j].jetonCourant == null) {
-                tabCellule[i][j].jetonCourant = jeton;
+            if (tabCellule[i][j].affecterJeton(jeton) == true) {
+                if (tabCellule[i][j].presenceTrouNoir() == true && tabCellule[i][j].presenceDesintegrateur() == false) {
+                    tabCellule[i][j].activerTrouNoir();
+                } else if (tabCellule[i][j].presenceTrouNoir() == true && tabCellule[i][j].presenceDesintegrateur() == true) {
+                    tabCellule[i][j].activerTrouNoir();
+                    tabCellule[i][j].recupererDesintegrateur();
+                } else if (tabCellule[i][j].presenceDesintegrateur() == true) {
+                    tabCellule[i][j].recupererDesintegrateur();
+                }
                 return true;
             }
         }
         return false;
+        /*
+        for (int i = tabCellule.length - 1; i >= 0; i--) {
+            if (tabCellule[i][j].jetonCourant == null) {
+                tabCellule[i][j].jetonCourant = jeton;
+                //tabCellule[i][j].activerTrouNoir();
+                if (tabCellule[i][j].presenceTrouNoir() == true && tabCellule[i][j].presenceDesintegrateur() == false) {
+                    tabCellule[i][j].activerTrouNoir();
+                } else if (tabCellule[i][j].presenceTrouNoir() == true && tabCellule[i][j].presenceDesintegrateur() == true) {
+                    tabCellule[i][j].activerTrouNoir();
+                    tabCellule[i][j].recupererDesintegrateur();
+                } else if (tabCellule[i][j].presenceDesintegrateur() == true) {
+                    tabCellule[i][j].recupererDesintegrateur();
+                }
+                return true;
+            }
+        }
+        return false;
+        */
     }
 //• + etreRemplie(): renvoie vrai si la grille est pleine
     public boolean etreRemplie() {
@@ -48,18 +73,16 @@ public class Grille {
     public void afficherGrilleSurConsole() {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
-                if (tabCellule[i][j].trouNoir == true || tabCellule[i][j].desintegrateur == true) {
-                    if (tabCellule[i][j].trouNoir == true) {
+                if (tabCellule[i][j].jetonCourant == null) {
+                    if ((tabCellule[i][j].trouNoir == true && tabCellule[i][j].desintegrateur == false) || (tabCellule[i][j].trouNoir == true && tabCellule[i][j].desintegrateur == true)) {
                         System.out.println("n");
-                    }
-                    if (tabCellule[i][j].desintegrateur == true) {
+                    } else if (tabCellule[i][j].trouNoir == false && tabCellule[i][j].desintegrateur == true) {
                         System.out.println("d");
-                    }
-                } else {
-                    if (tabCellule[i][j].jetonCourant == null) {
+                    } else {
                         System.out.println("-");
                     }
-                    System.out.println(tabCellule[i][j].jetonCourant.couleur);
+                } else {
+                    System.out.println(lireCouleurDuJeton(i, j));
                 }
             }
         }
@@ -73,7 +96,7 @@ public class Grille {
     }
 //• +	lireCouleurDuJeton(int,	int): renvoie la couleur du jeton de la cellule ciblée.
     public String lireCouleurDuJeton(int i, int j) {
-        return tabCellule[i][j].jetonCourant.couleur;
+        return tabCellule[i][j].lireCouleurDuJeton();
     }
 //• +	etreGagnantePourJoueur(Joueur): renvoie	vrai si	la grille est gagnante pour le joueur passé en paramètre, c’est-à-dire que 4 pions de sa couleur sont alignés en ligne, en colonne ou en diagonale.
     public boolean etreGagnantePourJoueur(Joueur Jr) {
@@ -120,6 +143,8 @@ public class Grille {
     }
 //• +placerTrouNoir(int, int): ajoute un trou noir à l’endroit indiqué et retourne vrai si l’ajout s’est bien passé, ou faux sinon (exemple : trou noir déjà présent)
     public boolean  placerTrouNoir(int i, int j) {
+        return tabCellule[i][j].placerTrouNoir();
+        /*
         if (tabCellule[i][j].trouNoir == true) {
             return false;
         } else {
@@ -127,9 +152,12 @@ public class Grille {
             //tabCellule[i][j].jetonCourant.couleur = "n";
             return true;
         }
+        */
     }
 //• +placerDesintegrateur(int,int): ajoute un désintégrateur à l’endroit	indiqué	et retourne vrai si l’ajout s’est bien passé, ou faux sinon (exemple : désintégrateur déjà présent)
     public boolean placerDesintegrateur(int i, int j) {
+        return tabCellule[i][j].placerDesintegrateur();
+        /*
         if (tabCellule[i][j].desintegrateur == true) {
             return false;
         } else {
@@ -137,18 +165,26 @@ public class Grille {
             //tabCellule[i][j].jetonCourant.couleur = "d";
             return true;
         }
+        */
     }
 //• +supprimerJeton(int, int): supprime le jeton de la cellule visée. Renvoie vrai si la suppression s’est bien déroulée, ou faux autrement (jeton absent)
     public boolean supprimerJeton(int i, int j){
+        return tabCellule[i][j].supprimerJeton();
+        /*
         if (tabCellule[i][j].jetonCourant == null) {
             return false;
         }
         tabCellule[i][j].jetonCourant = null;
         return true;
+        */
     }	 
 //• +recupererJeton(int, int): enlève le	 jeton de la cellule visée et renvoie une référence vers ce jeton.
-    public void recupererJeton(int i, int j) {
+    public Jetons recupererJeton(int i, int j) {
+        return tabCellule[i][j].recupererJeton();
+        /*
         Jetons jeton = tabCellule[i][j].jetonCourant;
         tabCellule[i][j].jetonCourant = null;
+        return jeton;
+        */
     }
 }

@@ -26,8 +26,8 @@ public class Cellule {
 //• + Cellule() : construteur initialisant les attributs avec des valeurs par défaut
     public Cellule() {
         jetonCourant = null;
-        trouNoir = true;
-        desintegrateur = true;
+        trouNoir = false;
+        desintegrateur = false;
     } 
     
 //• + affecterJeton(Jeton): ajoute le jeton en paramètre à la cellule, et retourne vrai	si l’ajout s’est bien passé, ou	faux sinon (ex : jeton déjà présent)

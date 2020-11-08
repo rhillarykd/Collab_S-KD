@@ -33,8 +33,15 @@ public class Joueur {
     }
     public boolean ajouterJeton(Jetons jeton) {
         //ajoute le jeton passé	en paramètre à la liste	des jetons
-        ListeJetons = new Jetons[ListeJetons.length+1];
+        ListeJetons = new Jetons[ListeJetons.length + 1];
         ListeJetons[ListeJetons.length] = jeton;
+        nombreJetonsRestant++;
+        return true;
+    }
+    public boolean soustraireJeton() {
+        //Soustrait le jeton passé en paramètre à la liste des jetons
+        ListeJetons = new Jetons[ListeJetons.length - 1];
+        //ListeJetons[ListeJetons.length - 2] = jeton;
         return true;
     }
     public void obtenirDesintegrateur() {
