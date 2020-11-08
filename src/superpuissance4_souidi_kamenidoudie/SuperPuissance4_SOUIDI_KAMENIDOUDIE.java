@@ -5,7 +5,7 @@
  */
 package superpuissance4_souidi_kamenidoudie;
 
-import java.util.Random;
+//import java.util.Random;
 
 import java.util.Scanner;
 
@@ -20,18 +20,9 @@ public class SuperPuissance4_SOUIDI_KAMENIDOUDIE {
      */
     public static void main(String[] args) {
         
-        int x;
-        x=1;
-        int y;
-        y=2;
-        Random rand = new Random();
-        int z;
-        z= rand.nextInt(2);
-        System.out.println(z);
-        // On met si z=0 alors joueurs 1 prends jetons vert et joueur deux prend lautre couleur
-        
         //Début d'une partie
         Partie partie1 = new Partie();
+        
         Scanner monObjet = new Scanner(System.in);
         String NomJoueur;
         System.out.println("Pour jouer, entrer votre nom :"); 

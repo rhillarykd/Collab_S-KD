@@ -38,12 +38,14 @@ public class Joueur {
         nombreJetonsRestant++;
         return true;
     }
+    /*
     public boolean soustraireJeton() {
         //Soustrait le jeton passé en paramètre à la liste des jetons
         ListeJetons = new Jetons[ListeJetons.length - 1];
         //ListeJetons[ListeJetons.length - 2] = jeton;
         return true;
     }
+    */
     public void obtenirDesintegrateur() {
         //incrémente le	nombre	de désintégrateurs du joueur
         nombreDesintegrateurs++;

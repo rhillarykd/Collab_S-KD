@@ -119,34 +119,46 @@ public class Partie {
             grillePartie.afficherGrilleSurConsole();
             Scanner c = new Scanner(System.in);
             System.out.println("1 - Ajouter un jeton dans une colonne \n2 - Utiliser un désintégrateur \n3 - Récupérer un jeton ");//Menu, choix des méthodes pour jouer
-            int choix = c.nextInt();
-            Scanner ligneI = new Scanner(System.in);
-            Scanner colonneJ = new Scanner(System.in);
-            if (choix == 1) {//Ajoute d'un jeton dans une colonne
-                //int numeroJeton = 0;
-                System.out.println("Choisissez la colonne: "); 
-                int j = colonneJ.nextInt();
-                if (grillePartie.colonneRemplie(j) == false) {
-                    //grillePartie.ajouterJetonDansColonne(joueurCourant.ListeJetons[numeroJeton], j);
-                    grillePartie.ajouterJetonDansColonne(joueurCourant.ListeJetons[joueurCourant.ListeJetons.length - joueurCourant.nombreJetonsRestant], j);
-                    joueurCourant.nombreJetonsRestant--;
-                }
-            } else if (choix == 2) {//Utilisation d'un désintégrateur
-                if (joueurCourant.utiliserDesintegrateur() == true) {
-                    System.out.println("Choisissez la ligne du désintégrateur à placer: "); 
+            int choix = 0;
+            while (choix == 0) {
+                choix = c.nextInt();
+                Scanner ligneI = new Scanner(System.in);
+                Scanner colonneJ = new Scanner(System.in);
+                if (choix == 1) {//Ajoute d'un jeton dans une colonne
+                    //int numeroJeton = 0;
+                    System.out.println("Choisissez la colonne: "); 
+                    int j = colonneJ.nextInt();
+                    if (grillePartie.colonneRemplie(j) == false) {
+                        //grillePartie.ajouterJetonDansColonne(joueurCourant.ListeJetons[numeroJeton], j);
+                        grillePartie.ajouterJetonDansColonne(joueurCourant.ListeJetons[joueurCourant.ListeJetons.length - joueurCourant.nombreJetonsRestant], j);
+                        joueurCourant.nombreJetonsRestant--;
+                        System.out.println("Pour savoir si vous avez gagné un désintégrateur, entrez le numéro de la ligne de votre jeton: ");
+                        int i = ligneI.nextInt();
+                        if (grillePartie.tabCellule[i][j].recupererDesintegrateur() == true) {
+                            joueurCourant.obtenirDesintegrateur();
+                        }
+                        break;
+                    }
+                } else if (choix == 2) {//Utilisation d'un désintégrateur
+                    if (joueurCourant.utiliserDesintegrateur() == true) {
+                        System.out.println("Choisissez la ligne du désintégrateur à placer: "); 
+                        int i = ligneI.nextInt();//numéro de ligne
+                        System.out.println("Choisissez la colonne du désintégrateur à placer: "); 
+                        int j = colonneJ.nextInt();//numéro de colonne
+                        grillePartie.placerDesintegrateur(i, j);
+                        grillePartie.tasserGrille(i, j);
+                        break;
+                    }
+                } else if (choix == 3) {//Récupération d'un jeton
+                    System.out.println("Choisissez la ligne du jeton à récupérer");
                     int i = ligneI.nextInt();//numéro de ligne
-                    System.out.println("Choisissez la colonne du désintégrateur à placer: "); 
+                    System.out.println("Choisissez la colonne du jeton à recupérer");
                     int j = colonneJ.nextInt();//numéro de colonne
-                    grillePartie.placerDesintegrateur(i, j);
+                    joueurCourant.ajouterJeton(grillePartie.recupererJeton(i, j));
                     grillePartie.tasserGrille(i, j);
+                    break;
                 }
-            } else if (choix == 3) {//Récupération d'un jeton
-                System.out.println("Choisissez la ligne du jeton à récupérer");
-                int i = ligneI.nextInt();//numéro de ligne
-                System.out.println("Choisissez la colonne du jeton à recupérer");
-                int j = colonneJ.nextInt();//numéro de colonne
-                joueurCourant.ajouterJeton(grillePartie.recupererJeton(i, j));
-                grillePartie.tasserGrille(i, j);
+                choix = 0;
             }
             
             if (grillePartie.etreGagnantePourJoueur(ListeJoueurs[0]) == true && grillePartie.etreGagnantePourJoueur(ListeJoueurs[1]) == true) {
