@@ -16,9 +16,16 @@ public class Grille {
     //Attributs :	
     //• Cellules: grille de 42 cellules
     Cellule [][] tabCellule = new Cellule[6][7];
-        
-        
-    //Méthodes :
+    public Grille() {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                tabCellule[i][j] = new Cellule();
+            }
+        }
+    }
+    
+    
+   //Méthodes :
 //• + ajouterJetonDansColonne(Jeton, int): ajoute le jeton dans la colonne ciblée, sur la cellule vide la plus basse. Renvoie faux si la colonne était pleine.
     public boolean ajouterJetonDansColonne(Jetons jeton, int j) {
         for (int i = tabCellule.length - 1; i >= 0; i--) {
@@ -67,23 +74,34 @@ public class Grille {
     }
 //• + viderGrille(): vide la grille
     public void viderGrille() {
-        tabCellule = null;
+        //tabCellule = null;
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                tabCellule[i][j] = new Cellule();
+            }
+        }
     }
 //• + afficherGrilleSurConsole(): fonction d’affichage de la grille sur la console. Doit faire apparaitre les couleurs, et les trous noirs.
     public void afficherGrilleSurConsole() {
+        int nb = 1;
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
                 if (tabCellule[i][j].jetonCourant == null) {
                     if ((tabCellule[i][j].trouNoir == true && tabCellule[i][j].desintegrateur == false) || (tabCellule[i][j].trouNoir == true && tabCellule[i][j].desintegrateur == true)) {
-                        System.out.println("n");
+                        System.out.print("n");
                     } else if (tabCellule[i][j].trouNoir == false && tabCellule[i][j].desintegrateur == true) {
-                        System.out.println("d");
+                        System.out.print("d");
                     } else {
-                        System.out.println("-");
+                        System.out.print("-");
                     }
                 } else {
-                    System.out.println(lireCouleurDuJeton(i, j));
+                    System.out.print(lireCouleurDuJeton(i, j));
                 }
+                if (nb == 7) {
+                    nb = 0;
+                    System.out.print("\n");
+                }
+                nb++;
             }
         }
     }
@@ -187,4 +205,12 @@ public class Grille {
         return jeton;
         */
     }
+    
+    /*
+    @Override
+    public String toString () {
+        for (int)
+        return tabCellule[i][j].jetonCourant;
+    }
+    */
 }

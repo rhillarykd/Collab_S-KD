@@ -50,6 +50,7 @@ public class Joueur {
     */
     public void obtenirDesintegrateur() {
         //incrémente le	nombre	de désintégrateurs du joueur
+        
         nombreDesintegrateurs++;
     }
     public boolean utiliserDesintegrateur() {

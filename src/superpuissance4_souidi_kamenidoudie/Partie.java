@@ -20,7 +20,9 @@ public class Partie {
     //Attributs
     Joueur [] ListeJoueurs = new Joueur[2]; //tableau contenant les deux joueurs de la partie
     Joueur joueurCourant; //désigne le joueur	courant	à tout	moment	de la partie
-    Grille grillePartie = new Grille();//Grille [] tabGrille = new Grille[1]
+    Grille grillePartie = new Grille();
+    //Grille [] tabGrille = new Grille[1];
+    
     
     //Méthodes
     public void attribuerCouleursAuxJoueurs() {
@@ -37,15 +39,16 @@ public class Partie {
     }
     public void	initialiserPartie() {
         //crée la grille, la vide si elle existait déjà, place les trous noirs et les désintégrateurs, crée les jetons et les attribue aux joueurs correspondants.
+        //grillePartie.afficherGrilleSurConsole();
         if (grillePartie != null) {
+            grillePartie = new Grille();
             grillePartie.viderGrille();
         }
-        
         Random nAlea = new Random();//r pour random
         for (int nTrouNoir = 0; nTrouNoir < 5; nTrouNoir++) {//nTrouNoir est le nombre de trous noirs -1, il y en a 5 et finalement nombre de désintégrateurs -1
             int iAlea = nAlea.nextInt(6);
             int jAlea = nAlea.nextInt(7);
-            boolean result = grillePartie.placerTrouNoir(iAlea, jAlea);
+            boolean result = grillePartie.placerTrouNoir(iAlea,jAlea);
             //grillePartie.tabCellule[iAlea][jAlea].trouNoir = true;
             if (nTrouNoir < 2) {
                 result = grillePartie.placerDesintegrateur(iAlea,jAlea);
@@ -121,7 +124,7 @@ public class Partie {
         while(condition == false) {
             grillePartie.afficherGrilleSurConsole();
             Scanner c = new Scanner(System.in);
-            System.out.println("1 - Ajouter un jeton dans une colonne \n2 - Utiliser un désintégrateur \n3 - Récupérer un jeton ");//Menu, choix des méthodes pour jouer
+            System.out.println(" \n1 - Ajouter un jeton dans une colonne \n2 - Utiliser un désintégrateur \n3 - Récupérer un jeton ");//Menu, choix des méthodes pour jouer
             int choix = 0;
             boolean result;
             while (choix == 0) {
