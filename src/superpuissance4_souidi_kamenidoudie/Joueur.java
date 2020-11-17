@@ -28,15 +28,20 @@ public class Joueur {
         nombreJetonsRestant = 21;
     }
     
-    
     public void affecterCouleur(String couleurJ) {
         //affecte la couleur en	paramètre au joueur
         couleur = couleurJ;
     }
     public boolean ajouterJeton(Jetons jeton) {
         //ajoute le jeton passé	en paramètre à la liste	des jetons
-        ListeJetons = new Jetons[ListeJetons.length + 1];
-        ListeJetons[ListeJetons.length] = jeton;
+        //ListeJetons = new Jetons[ListeJetons.length + 1];
+        //ListeJetons[ListeJetons.length] = jeton;
+        Jetons [] ListeIntermediaire = ListeJetons;
+        ListeJetons = new Jetons[ListeIntermediaire.length + 1];
+        for (int i = 0; i < ListeIntermediaire.length; i++) {
+            ListeJetons[i] = ListeIntermediaire[i];
+        }
+        ListeJetons[ListeIntermediaire.length] = jeton;
         nombreJetonsRestant++;
         return true;
     }

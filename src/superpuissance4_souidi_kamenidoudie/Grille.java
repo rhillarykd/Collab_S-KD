@@ -16,6 +16,8 @@ public class Grille {
     //Attributs :	
     //• Cellules: grille de 42 cellules
     Cellule [][] tabCellule = new Cellule[6][7];
+    
+    //Constructeur :
     public Grille() {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
@@ -23,7 +25,6 @@ public class Grille {
             }
         }
     }
-    
     
    //Méthodes :
 //• + ajouterJetonDansColonne(Jeton, int): ajoute le jeton dans la colonne ciblée, sur la cellule vide la plus basse. Renvoie faux si la colonne était pleine.
@@ -65,7 +66,7 @@ public class Grille {
     public boolean etreRemplie() {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
-                if (tabCellule[i][j] == null) {
+                if (tabCellule[i][j] == null || (tabCellule[i][j].lireCouleurDuJeton() == "J" || tabCellule[i][j].lireCouleurDuJeton() == "R")) {
                     return false;
                 }
             }
@@ -118,8 +119,8 @@ public class Grille {
     }
 //• +	etreGagnantePourJoueur(Joueur): renvoie	vrai si	la grille est gagnante pour le joueur passé en paramètre, c’est-à-dire que 4 pions de sa couleur sont alignés en ligne, en colonne ou en diagonale.
     public boolean etreGagnantePourJoueur(Joueur Jr) {
-        for (int i = 0; i < tabCellule.length - 5; i++) {
-            for (int j = 0; j < tabCellule[i].length - 5; j++) {
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 3; j++) {
                 if (tabCellule[i][j].jetonCourant.couleur == tabCellule[i][j+1].jetonCourant.couleur && tabCellule[i][j+1].jetonCourant.couleur == tabCellule[i][j+2].jetonCourant.couleur && tabCellule[i][j+2].jetonCourant.couleur == tabCellule[i][j+3].jetonCourant.couleur && tabCellule[i][j+3].jetonCourant.couleur == tabCellule[i][j+4].jetonCourant.couleur && tabCellule[i][j+4].jetonCourant.couleur == Jr.couleur) {
                     return true;
                 }
@@ -205,7 +206,27 @@ public class Grille {
         return jeton;
         */
     }
-    
+    public int retrouverLigneJeton(int j) {
+        //Méthode qui retrouve la ligne d'un jeton qui vient d'être placé
+        for (int i = 5; i > 0; i--) {
+            if (tabCellule[i][j].jetonCourant != null && tabCellule[i - 1][j].jetonCourant == null) {
+                return i;
+            }
+        }
+        return j;
+    }
+    public int nbJetonMMcouleur(Joueur Jr) {
+        //Méthode qui compte le nombre de jetons de la même couleur contenus dans la grille
+        int nbJetonJr = 0;
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (tabCellule[i][j] != null && Jr.couleur == tabCellule[i][j].lireCouleurDuJeton()) {
+                    nbJetonJr++;
+                }
+            }
+        }
+        return nbJetonJr;
+    }
     /*
     @Override
     public String toString () {

@@ -84,7 +84,10 @@ public class Cellule {
     }
 //• + lireCouleurDuJeton(): renvoie la couleur du jeton	occupant la cellule
     public String lireCouleurDuJeton() {
-        return jetonCourant.couleur;
+        if (jetonCourant != null) {
+            return jetonCourant.lireCouleur();
+        }
+        return "-";
     }
 //• + recupererDesintegrateur(): supprime le désintégrateur présent de la cellule, et renvoie vrai, ou faux sinon (exemple : pas de désintégrateur présent)
     public boolean recupererDesintegrateur() {
