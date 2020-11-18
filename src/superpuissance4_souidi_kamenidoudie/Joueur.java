@@ -36,14 +36,17 @@ public class Joueur {
         //ajoute le jeton passé	en paramètre à la liste	des jetons
         //ListeJetons = new Jetons[ListeJetons.length + 1];
         //ListeJetons[ListeJetons.length] = jeton;
-        Jetons [] ListeIntermediaire = ListeJetons;
-        ListeJetons = new Jetons[ListeIntermediaire.length + 1];
-        for (int i = 0; i < ListeIntermediaire.length; i++) {
-            ListeJetons[i] = ListeIntermediaire[i];
+        if (jeton != null && ListeJetons[ListeJetons.length - 1].couleur == jeton.lireCouleur()) {
+            Jetons [] ListeIntermediaire = ListeJetons;
+            ListeJetons = new Jetons[ListeIntermediaire.length + 1];
+            for (int i = 0; i < ListeIntermediaire.length; i++) {
+                ListeJetons[i] = ListeIntermediaire[i];
+            }
+            ListeJetons[ListeIntermediaire.length] = jeton;
+            nombreJetonsRestant++;
+            return true;
         }
-        ListeJetons[ListeIntermediaire.length] = jeton;
-        nombreJetonsRestant++;
-        return true;
+        return false;
     }
     /*
     public boolean soustraireJeton() {

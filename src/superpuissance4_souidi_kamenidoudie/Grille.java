@@ -85,21 +85,23 @@ public class Grille {
 //• + afficherGrilleSurConsole(): fonction d’affichage de la grille sur la console. Doit faire apparaitre les couleurs, et les trous noirs.
     public void afficherGrilleSurConsole() {
         int nb = 1;
+        System.out.println("0 1 2 3 4 5 6");
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 7; j++) {
                 if (tabCellule[i][j].jetonCourant == null) {
                     if ((tabCellule[i][j].trouNoir == true && tabCellule[i][j].desintegrateur == false) || (tabCellule[i][j].trouNoir == true && tabCellule[i][j].desintegrateur == true)) {
-                        System.out.print("n");
+                        System.out.print("n ");
                     } else if (tabCellule[i][j].trouNoir == false && tabCellule[i][j].desintegrateur == true) {
-                        System.out.print("d");
+                        System.out.print("d ");
                     } else {
-                        System.out.print("-");
+                        System.out.print("- ");
                     }
                 } else {
-                    System.out.print(lireCouleurDuJeton(i, j));
+                    System.out.print(lireCouleurDuJeton(i, j)+" ");
                 }
                 if (nb == 7) {
                     nb = 0;
+                    System.out.print(i+" ");
                     System.out.print("\n");
                 }
                 nb++;
@@ -199,7 +201,9 @@ public class Grille {
     }	 
 //• +recupererJeton(int, int): enlève le	 jeton de la cellule visée et renvoie une référence vers ce jeton.
     public Jetons recupererJeton(int i, int j) {
-        return tabCellule[i][j].recupererJeton();
+        Jetons jetonArecup = tabCellule[i][j].recupererJeton();
+        tabCellule[i][j] = new Cellule();
+        return jetonArecup;
         /*
         Jetons jeton = tabCellule[i][j].jetonCourant;
         tabCellule[i][j].jetonCourant = null;

@@ -130,7 +130,7 @@ public class Partie {
             Scanner c = new Scanner(System.in);
             int choix = 0;
             while (choix == 0) {
-                System.out.println(" \n1 - Ajouter un jeton dans une colonne \n2 - Utiliser un désintégrateur \n3 - Récupérer un jeton ");//Menu, choix des méthodes pour jouer
+                System.out.println("\nIl vous reste "+joueurCourant.nombreJetonsRestant+" jetons et "+joueurCourant.nombreDesintegrateurs+" désintégrateurs.\n     JOUEZ : \n1 - Ajouter un jeton dans une colonne \n2 - Utiliser un désintégrateur \n3 - Récupérer un jeton ");//Menu, choix des méthodes pour jouer
                 choix = c.nextInt();
                 Scanner ligneI = new Scanner(System.in);
                 Scanner colonneJ = new Scanner(System.in);
@@ -170,6 +170,7 @@ public class Partie {
                         break;
                     }
                 }
+                System.out.println("\n  Veuillez choisir à nouveau parmi les propositions ci-dessous.");
                 choix = 0;
             }
             if (grillePartie.nbJetonMMcouleur(joueurCourant) >= 4) { 
