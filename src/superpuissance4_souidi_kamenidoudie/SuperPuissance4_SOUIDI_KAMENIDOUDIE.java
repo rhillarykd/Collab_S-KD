@@ -22,12 +22,12 @@ public class SuperPuissance4_SOUIDI_KAMENIDOUDIE {
         //Début d'une partie
         Partie partie1 = new Partie();
         Scanner pseudo = new Scanner(System.in);
-        Joueur joueur1 = new Joueur("Souidi");
-        //System.out.println("Joueur 1: Entrez votre pseudo ");
-        //Joueur joueur1 = new Joueur(pseudo.nextLine());
-        Joueur joueur2 = new Joueur("KD");
-        //System.out.println("Joueur 2: Entrez votre pseudo ");
-        //Joueur joueur2 = new Joueur(pseudo.nextLine());
+        //Joueur joueur1 = new Joueur("Souidi");
+        System.out.println("Joueur 1: Entrez votre pseudo ");
+        Joueur joueur1 = new Joueur(pseudo.nextLine());
+        //Joueur joueur2 = new Joueur("KD");
+        System.out.println("Joueur 2: Entrez votre pseudo ");
+        Joueur joueur2 = new Joueur(pseudo.nextLine());
         partie1.ListeJoueurs[0] = joueur1;
         partie1.ListeJoueurs[1] = joueur2;
         partie1.attribuerCouleursAuxJoueurs();
